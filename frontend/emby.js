@@ -3,6 +3,7 @@ const API_PATH = '/emby';
 const ENDPOINTS = {
     SessionsService: {
         Sessions: '/Sessions',
+        Playing: '/Sessions/{Id}/Playing',
         PlayingCommand: '/Sessions/{Id}/Playing/{Command}'
     },
     ItemsService: {
@@ -50,7 +51,24 @@ function getSessions() {
 }
 
 function start() {
+    let mid = $('#movie-id').val();
+    let start = $('#start-time').val().split(':');
+    
+    let sminutes = start[0] * 60;
+    let sseconds = start[1];
 
+    let ticks = secondsToTicks(parseInt(sminutes) + parseInt(sseconds));
+
+
+    $('#group-list').val().split('\n').forEach((sid) => {
+        fetch(buildFetch(ENDPOINTS.SessionsService.Playing).replace('{Id}', sid) + `&PlayCommand=PlayNow&ItemIds=${mid}&StartPositionTicks=${ticks}`, {
+            method: 'POST'
+        })
+        .then((response) => response.text())
+        .then((text) => console.log(`Start sent to ${sid}`));
+    });
+
+    // https://emby.jmoore.dev:8920/emby/Sessions/a1a8d21675c18cfabe6b090ebb8e99c8/Playing?ItemIds=41149&StartPositionTicks=13800000000&PlayCommand=PlayNow
 }
 
 function playPause() {
@@ -97,4 +115,8 @@ function search() {
 
         $('#movie-info').html(data);
     });
+}
+
+function secondsToTicks(seconds) {
+    return seconds * 1000 * 10000;
 }
