@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title></title>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+        <script src="emby.js"></script>
+    </head>
+    <body>
+        <textarea id="key">Enter API key here</textarea><br>
+        <textarea id="host">Enter hostname here</textarea><br>
+        <textarea id="port">Enter port number here</textarea><br>
+    
+        <br><br>
+    
+        <button onclick="getSessions()">Get Sessions</button>
+        <br>
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Device</th>
+                <th>Key</th>
+            </tr>
+        </table>
+        <table id="session-info">
+            <tr></tr>
+        </table>
+        
+        <br><br>
+    
+        <h3>Session list</h3>
+        <textarea id="group-list">Enter Session ID's to control here. Each session should have it's own line.</textarea>
+    
+        <br><br>
+    
+        <h3>Movie ID</h3>
+        <textarea>Enter a single movie ID to play</textarea>
+    
+        <br><br>
+    
+        <h3>Controls</h3>
+    
+        <button onclick="start()">Start group session</button>
+        <br>
+        <button onclick="playPause()">Play/Pause</button>
+        <br>
+        <button onclick="stop()">Stop</button>
+    </body>
+</html>
