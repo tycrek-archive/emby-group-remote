@@ -4,6 +4,9 @@ const ENDPOINTS = {
     SessionsService: {
         Sessions: '/Sessions',
         PlayingCommand: '/Sessions/{Id}/Playing/{Command}'
+    },
+    ItemsService: {
+        Items: '/Items'
     }
 };
 
@@ -64,4 +67,34 @@ function playPause() {
 
 function stop() {
 
+}
+
+function search() {
+    let query = $('#search').val();
+
+    fetch(buildFetch(ENDPOINTS.ItemsService.Items) + `&Recursive=true&SearchTerm=${encodeURI(query)}`)
+    .then((response) => response.json())
+    .then((json) => {
+        console.log(json);
+        let data = '';
+        if (json.TotalRecordCount < 1) {
+            alert('No results');
+            return;
+        }
+        json.Items.forEach(item => {
+            let title = item.Name;
+            let type = item.Type;
+            let mid = item.Id;
+            data = data.concat(`
+            <tr>
+                <td>${title}</td>
+                <td>${type}</td>
+                <td>${mid}</td>
+            </tr>
+            `);
+            $('#movie-info tr:last').after(data);
+        });
+
+        $('#movie-info').html(data);
+    });
 }

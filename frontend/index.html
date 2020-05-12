@@ -33,13 +33,30 @@
         <h3>Session list</h3>
         <textarea id="group-list">Enter Session ID's to control here. Each session should have it's own line.</textarea>
     
-        <br><br>
+        <br><hr><br>
     
+        <h3>Movie search</h3>
+        <textarea id='search'>Enter a search query</textarea>
+        <button onclick="search()">Search</button>
+        <br>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>ID</th>
+            </tr>
+        </table>
+        <table id="movie-info">
+            <tr></tr>
+        </table>
+
+        <br><br>
+
         <h3>Movie ID</h3>
         <textarea>Enter a single movie ID to play</textarea>
     
-        <br><br>
-    
+        <br><hr><br>
+
         <h3>Controls</h3>
     
         <button onclick="start()">Start group session</button>
